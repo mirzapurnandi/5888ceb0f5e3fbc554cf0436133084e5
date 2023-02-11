@@ -15,4 +15,9 @@ class Category extends Model
         'name',
         'enable'
     ];
+
+    public function category()
+    {
+        return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id');
+    }
 }
