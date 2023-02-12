@@ -146,7 +146,7 @@ body {
 Point ini menambahkan data Image. gunakan form-data yang disediakan postman untuk dapat upload file image.
 
 #### Image Update
-| PUT | Image Update | http://localhost:8000/api/v1/image/1 |
+| POST | Image Update | http://localhost:8000/api/v1/image/1 |
 | ------ | ------ | ------ | 
 ```sh
 body {
@@ -161,3 +161,70 @@ Point ini memperbaharui data Gambar id = 1, file image dapat dikosongkan jika ti
 | ------ | ------ | ------ | 
 
 Point ini akan menghapus satu data Gambar yang telah di input.
+
+### Product
+#### product Index
+| GET | product Index | http://localhost:8000/api/v1/product |
+| ------ | ------ | ------ | 
+
+Point ini akan menampilkan semua Product yang telah di input.
+
+#### Product View
+| GET | Product View | http://localhost:8000/api/v1/product/1 |
+| ------ | ------ | ------ | 
+
+Point ini akan menampilkan satu data product yang telah di input.
+
+#### Product Insert
+| POST | Product Insert | http://localhost:8000/api/v1/product |
+| ------ | ------ | ------ | 
+```sh
+body {
+    "name": "Product 1",
+    "description": "Nama Product Pertama"
+    "enable": true
+}
+```
+Point ini menambahkan data product.
+
+#### Product Insert Image
+| POST | Product Insert | http://localhost:8000/api/v1/product/image |
+| ------ | ------ | ------ | 
+```sh
+body {
+    "function": "insert",
+    "product_id": 1,
+    "image_id": [3]
+}
+```
+Point ini menambahkan data gambar product, untuk penambahan gambar ini menggunakan array lebih dari satu. gunakan function "insert" untuk mode tambah gambar.
+
+#### Product Update Image
+| POST | Product Insert | http://localhost:8000/api/v1/product/image |
+| ------ | ------ | ------ | 
+```sh
+body {
+    "function": "update",
+    "product_id": 1,
+    "image_id": [3,4]
+}
+```
+Point ini memperbaharui data gambar product, untuk penambahan gambar ini menggunakan array lebih dari satu. gunakan function "update" untuk mode edit gambar, perlu di ingat gambar yang telah di insert tadi wajib di bawa kembali ke file image ini dikarenakan akan mengupdate semua gambar yang di field tersebut dan menghapus gambar yang tidak ada di field "image_id" ini menggunakan fungsi sync().
+
+#### Product Update
+| PUT | Product Update | http://localhost:8000/api/v1/product/1 |
+| ------ | ------ | ------ | 
+```sh
+body {
+    "name": "Product 1 Edit",
+    "description": "Nama Product setelah edit"
+    "enable": false
+}
+```
+Point ini memperbaharui data product id = 1.
+
+#### Product Delete
+| DELETE | Product Delete | http://localhost:8000/api/v1/product/1 |
+| ------ | ------ | ------ | 
+
+Point ini akan menghapus satu data product yang telah di input.
