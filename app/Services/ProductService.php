@@ -21,7 +21,7 @@ class ProductService
     public function getData($datas)
     {
         try {
-            $result = Product::simplepaginate($datas['limit']);
+            $result = Product::with('categories:id,name,enable')->simplepaginate($datas['limit']);
             return $this->successResponse($result, 'Success');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage(), $th->getCode());
@@ -46,7 +46,20 @@ class ProductService
 
     public function updateData($request)
     {
-        //
+        try {
+            $data = Product::findOrFail($request->id);
+            if ($request->name || $request->name != "") $data->name = $request->name;
+            if ($request->description || $request->description != "") $data->description = $request->description;
+            if ($request->enable) $data->enable = $request->enable;
+            $data->save();
+            if ($request->category_id) {
+                $data->categories()->sync($request->category_id);
+            }
+
+            return $this->successResponse($data, $this->name . ' ' . $data->name . ' berhasil diperbaharui.');
+        } catch (\Throwable $th) {
+            throw new SurplusException('Maaf, terjadi kesalahan saat update ' . $this->name);
+        }
     }
 
     public function deleteData($id)

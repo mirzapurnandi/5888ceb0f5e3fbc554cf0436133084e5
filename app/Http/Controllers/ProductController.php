@@ -29,7 +29,8 @@ class ProductController extends Controller
             'name' => 'required|string',
             'description' => 'required',
             'enable' => 'required|boolean',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|array',
+            'category_id.*' => 'exists:categories,id'
         ]);
 
         if ($validator->fails()) {
@@ -41,7 +42,19 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'string',
+            'description' => 'string',
+            'enable' => 'boolean',
+            'category_id' => 'array',
+            'category_id.*' => 'exists:categories,id'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorResponse($validator->errors(), 422);
+        }
+
+        return $this->productService->updateData($request);
     }
 
     public function destroy(Request $request)
