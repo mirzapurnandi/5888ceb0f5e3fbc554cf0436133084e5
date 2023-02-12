@@ -27,9 +27,16 @@ class ImageService
         }
     }
 
-    public function insertData($request, $name_file)
+    public function insertData($request)
     {
         try {
+            $name_file = '';
+            if ($request->hasfile('file')) {
+                $file = $request->file('file');
+                $name_file = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('images/product/'), $name_file);
+            }
+
             $data = new Image();
             $data->name = $request->name;
             $data->file = $name_file;
@@ -42,14 +49,20 @@ class ImageService
         }
     }
 
-    public function updateData($request, $name_file)
+    public function updateData($request)
     {
         try {
             $data = Image::findOrFail($request->id);
-            //remove old file
-            if ($data->file != null) {
-                $cekimage = public_path('images/product/' . $data->file);
-                if (file_exists($cekimage)) unlink($cekimage);
+
+            $name_file = '';
+            if ($request->hasfile('file')) {
+                $file = $request->file('file');
+                $name_file = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('images/product/'), $name_file);
+                if ($data->file != null) {
+                    $cekimage = public_path('images/product/' . $data->file);
+                    if (file_exists($cekimage)) unlink($cekimage);
+                }
             }
 
             if ($request->name || $request->name != "") $data->name = $request->name;

@@ -35,14 +35,7 @@ class ImageController extends Controller
             return $this->errorResponse($validator->errors(), 422);
         }
 
-        $filename = '';
-        if ($request->hasfile('file')) {
-            $file = $request->file('file');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/product/'), $filename);
-        }
-
-        return $this->imageService->insertData($request, $filename);
+        return $this->imageService->insertData($request);
     }
 
     public function update(Request $request)
@@ -57,14 +50,7 @@ class ImageController extends Controller
             return $this->errorResponse($validator->errors(), 422);
         }
 
-        $filename = '';
-        if ($request->hasfile('file')) {
-            $file = $request->file('file');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/product/'), $filename);
-        }
-
-        return $this->imageService->updateData($request, $filename);
+        return $this->imageService->updateData($request);
     }
 
     public function destroy(Request $request)
