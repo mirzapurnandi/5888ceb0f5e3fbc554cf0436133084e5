@@ -17,9 +17,9 @@ class Product extends Model
         'enable'
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsToMany(Category::class, 'category_product', 'category_id', 'product_id');
+        return $this->belongsToMany(Category::class, 'category_product');
     }
 
     public function image()
