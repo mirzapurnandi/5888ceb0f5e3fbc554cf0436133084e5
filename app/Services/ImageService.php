@@ -54,12 +54,27 @@ class ImageService
 
             if ($request->name || $request->name != "") $data->name = $request->name;
             if ($name_file != "") $data->file = $name_file;
-            if ($request->enable) $data->enable = $request->enable;
+            $data->enable = $request->enable;
             $data->save();
 
             return $this->successResponse($data, $this->name . ' ' . $data->name . ' berhasil diperbaharui.');
         } catch (\Throwable $th) {
             throw new SurplusException('Maaf, terjadi kesalahan saat update ' . $this->name);
+        }
+    }
+
+    public function deleteData($id)
+    {
+        try {
+            $data = Image::findOrFail($id);
+            if ($data->file != null) {
+                $cekimage = public_path('images/product/' . $data->file);
+                if (file_exists($cekimage)) unlink($cekimage);
+            }
+            $data->delete();
+            return $this->successResponse(null, $this->name . ' berhasil dihapus');
+        } catch (\Throwable $th) {
+            throw new SurplusException('Maaf, gagal menghapus ' . $this->name);
         }
     }
 }

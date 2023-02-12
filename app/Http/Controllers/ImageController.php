@@ -50,7 +50,7 @@ class ImageController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'string',
             'file' => 'nullable|image|mimes:jpeg,png,jpg|max:3072',
-            'enable' => 'boolean'
+            'enable' => 'required|boolean'
         ]);
 
         if ($validator->fails()) {
@@ -65,5 +65,10 @@ class ImageController extends Controller
         }
 
         return $this->imageService->updateData($request, $filename);
+    }
+
+    public function destroy(Request $request)
+    {
+        return $this->imageService->deleteData($request->id);
     }
 }
