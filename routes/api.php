@@ -29,6 +29,7 @@ Route::group([
     Route::delete('product/{id}', [ProductController::class, 'destroy']);
 
     Route::get('image', [ImageController::class, 'index']);
+    Route::get('image/{id}', [ImageController::class, 'view']);
     Route::post('image', [ImageController::class, 'store']);
     Route::post('image/{id}', [ImageController::class, 'update']);
     Route::delete('image/{id}', [ImageController::class, 'destroy']);

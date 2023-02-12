@@ -17,10 +17,14 @@ class ImageService
         $this->name = 'Image';
     }
 
-    public function getData($datas)
+    public function getData($datas, $id = null)
     {
         try {
-            $result = Image::simplepaginate($datas['limit']);
+            if ($id != "") {
+                $result = Image::with('products:id,name')->where('id', $id)->first();
+            } else {
+                $result = Image::simplepaginate($datas['limit']);
+            }
             return $this->successResponse($result, 'Success');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage(), $th->getCode());

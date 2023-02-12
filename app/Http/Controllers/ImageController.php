@@ -23,6 +23,11 @@ class ImageController extends Controller
         return $this->imageService->getData($datas);
     }
 
+    public function view(Request $request)
+    {
+        return $this->imageService->getData([], $request->id);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
