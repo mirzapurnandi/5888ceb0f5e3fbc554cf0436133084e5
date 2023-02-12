@@ -119,3 +119,45 @@ Point ini memperbaharui data category id = 1.
 | ------ | ------ | ------ | 
 
 Point ini akan menghapus satu data category yang telah di input.
+
+### Image
+#### Image Index
+| GET | Image Index | http://localhost:8000/api/v1/image |
+| ------ | ------ | ------ | 
+
+Point ini akan menampilkan semua Gambar yang telah di input.
+
+#### Image View
+| GET | Image View | http://localhost:8000/api/v1/image/1 |
+| ------ | ------ | ------ | 
+
+Point ini akan menampilkan satu data Gambar yang telah di input.
+
+#### Image Insert
+| POST | Image Insert | http://localhost:8000/api/v1/image |
+| ------ | ------ | ------ | 
+```sh
+body {
+    "name": "Image 1",
+    "enable": true,
+    "file": "folder/nama_gambar.jpg"
+}
+```
+Point ini menambahkan data Image. gunakan form-data yang disediakan postman untuk dapat upload file image.
+
+#### Image Update
+| PUT | Image Update | http://localhost:8000/api/v1/image/1 |
+| ------ | ------ | ------ | 
+```sh
+body {
+    "name": "Image 1 Edit",
+    "enable": false
+}
+```
+Point ini memperbaharui data Gambar id = 1, file image dapat dikosongkan jika tidak ingin mengubah gambarnya.
+
+#### Image Delete
+| DELETE | Image Delete | http://localhost:8000/api/v1/image/1 |
+| ------ | ------ | ------ | 
+
+Point ini akan menghapus satu data Gambar yang telah di input.
