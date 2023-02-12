@@ -45,7 +45,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'string',
             'description' => 'string',
-            'enable' => 'boolean',
+            'enable' => 'required|boolean',
             'category_id' => 'array',
             'category_id.*' => 'exists:categories,id'
         ]);

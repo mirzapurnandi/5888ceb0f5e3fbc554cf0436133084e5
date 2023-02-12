@@ -49,7 +49,7 @@ class ProductService
             $data = Product::findOrFail($request->id);
             if ($request->name || $request->name != "") $data->name = $request->name;
             if ($request->description || $request->description != "") $data->description = $request->description;
-            if ($request->enable) $data->enable = $request->enable;
+            $data->enable = $request->enable;
             $data->save();
             if ($request->category_id) {
                 $data->categories()->sync($request->category_id);
