@@ -28,6 +28,6 @@ Route::group([
 
     Route::get('image', [ImageController::class, 'index']);
     Route::post('image', [ImageController::class, 'store']);
-    Route::put('image/{id}', [ImageController::class, 'update']);
+    Route::post('image/{id}', [ImageController::class, 'update']);
     Route::delete('image/{id}', [ImageController::class, 'destroy']);
 });

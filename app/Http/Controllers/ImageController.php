@@ -44,4 +44,26 @@ class ImageController extends Controller
 
         return $this->imageService->insertData($request, $filename);
     }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'string',
+            'file' => 'nullable|image|mimes:jpeg,png,jpg|max:3072',
+            'enable' => 'boolean'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorResponse($validator->errors(), 422);
+        }
+
+        $filename = '';
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/product/'), $filename);
+        }
+
+        return $this->imageService->updateData($request, $filename);
+    }
 }
