@@ -39,7 +39,16 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'enable' => 'required|boolean'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorResponse($validator->errors(), 422);
+        }
+
+        return $this->categoryService->updateData($request);
     }
 
     public function destroy($barang_id)

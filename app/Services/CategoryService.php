@@ -33,4 +33,18 @@ class CategoryService
             throw new SurplusException('Maaf, terjadi kesalahan saat insert Category');
         }
     }
+
+    public function updateData($request)
+    {
+        try {
+            $data = Category::findOrFail($request->id);
+            $data->name = $request->name;
+            $data->enable = $request->enable;
+            $data->save();
+
+            return $this->successResponse($data, "Category " . $data->name . " berhasil diperbaharui.");
+        } catch (\Throwable $th) {
+            throw new SurplusException('Maaf, terjadi kesalahan saat update Category');
+        }
+    }
 }
