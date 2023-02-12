@@ -26,4 +26,19 @@ class ImageService
             return $this->errorResponse($th->getMessage(), $th->getCode());
         }
     }
+
+    public function insertData($request, $name_file)
+    {
+        try {
+            $data = new Image();
+            $data->name = $request->name;
+            $data->file = $name_file;
+            $data->enable = $request->enable;
+            $data->save();
+
+            return $this->successResponse($data, $this->name . ' ' . $data->name . ' berhasil dibuat.');
+        } catch (\Throwable $th) {
+            throw new SurplusException('Maaf, terjadi kesalahan saat insert ' . $this->name);
+        }
+    }
 }
