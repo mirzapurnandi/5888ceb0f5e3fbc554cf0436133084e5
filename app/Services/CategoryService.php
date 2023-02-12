@@ -12,9 +12,9 @@ class CategoryService
 
     protected $name;
 
-    public function __construct($name)
+    public function __construct()
     {
-        $this->name = $name;
+        $this->name = 'Category';
     }
 
     public function getData($datas)
