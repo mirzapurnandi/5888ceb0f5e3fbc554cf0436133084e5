@@ -59,6 +59,6 @@ class ProductController extends Controller
 
     public function destroy(Request $request)
     {
-        //
+        return $this->productService->deleteData($request->id);
     }
 }

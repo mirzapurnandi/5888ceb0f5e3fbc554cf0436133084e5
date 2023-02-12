@@ -64,6 +64,13 @@ class ProductService
 
     public function deleteData($id)
     {
-        //
+        try {
+            $data = Product::findOrFail($id);
+            $data->categories()->detach();
+            $data->delete();
+            return $this->successResponse(null, $this->name . ' berhasil dihapus');
+        } catch (\Throwable $th) {
+            throw new SurplusException('Maaf, gagal menghapus ' . $this->name);
+        }
     }
 }
