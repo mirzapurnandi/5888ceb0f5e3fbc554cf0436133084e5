@@ -47,4 +47,15 @@ class CategoryService
             throw new SurplusException('Maaf, terjadi kesalahan saat update Category');
         }
     }
+
+    public function deleteData($id)
+    {
+        try {
+            $data = Category::findOrFail($id);
+            $data->delete();
+            return $this->successResponse(null, 'Category berhasil dihapus');
+        } catch (\Throwable $th) {
+            throw new SurplusException('Maaf, gagal menghapus Category');
+        }
+    }
 }

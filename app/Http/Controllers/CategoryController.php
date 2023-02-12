@@ -51,8 +51,8 @@ class CategoryController extends Controller
         return $this->categoryService->updateData($request);
     }
 
-    public function destroy($barang_id)
+    public function destroy(Request $request)
     {
-        //
+        return $this->categoryService->deleteData($request->id);
     }
 }
