@@ -10,6 +10,13 @@ class CategoryService
 {
     use ApiResponser;
 
+    protected $name;
+
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+
     public function getData($datas)
     {
         try {
@@ -28,9 +35,9 @@ class CategoryService
             $data->enable = $request->enable;
             $data->save();
 
-            return $this->successResponse($data, "Category " . $data->name . " berhasil dibuat.");
+            return $this->successResponse($data, $this->name . ' ' . $data->name . ' berhasil dibuat.');
         } catch (\Throwable $th) {
-            throw new SurplusException('Maaf, terjadi kesalahan saat insert Category');
+            throw new SurplusException('Maaf, terjadi kesalahan saat insert ' . $this->name);
         }
     }
 
@@ -42,9 +49,9 @@ class CategoryService
             $data->enable = $request->enable;
             $data->save();
 
-            return $this->successResponse($data, "Category " . $data->name . " berhasil diperbaharui.");
+            return $this->successResponse($data, $this->name . ' ' . $data->name . ' berhasil diperbaharui.');
         } catch (\Throwable $th) {
-            throw new SurplusException('Maaf, terjadi kesalahan saat update Category');
+            throw new SurplusException('Maaf, terjadi kesalahan saat update ' . $this->name);
         }
     }
 
@@ -53,9 +60,9 @@ class CategoryService
         try {
             $data = Category::findOrFail($id);
             $data->delete();
-            return $this->successResponse(null, 'Category berhasil dihapus');
+            return $this->successResponse(null, $this->name . ' berhasil dihapus');
         } catch (\Throwable $th) {
-            throw new SurplusException('Maaf, gagal menghapus Category');
+            throw new SurplusException('Maaf, gagal menghapus ' . $this->name);
         }
     }
 }
