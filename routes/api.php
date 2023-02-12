@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +25,9 @@ Route::group([
     Route::post('product', [ProductController::class, 'store']);
     Route::put('product/{id}', [ProductController::class, 'update']);
     Route::delete('product/{id}', [ProductController::class, 'destroy']);
+
+    Route::get('image', [ImageController::class, 'index']);
+    Route::post('image', [ImageController::class, 'store']);
+    Route::put('image/{id}', [ImageController::class, 'update']);
+    Route::delete('image/{id}', [ImageController::class, 'destroy']);
 });

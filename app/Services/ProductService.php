@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Traits\ApiResponser;
-use Illuminate\Support\Facades\DB;
 use App\Exceptions\SurplusException;
 
 class ProductService

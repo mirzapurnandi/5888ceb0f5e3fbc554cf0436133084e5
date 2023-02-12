@@ -17,8 +17,8 @@ class Image extends Model
         'enable'
     ];
 
-    public function image()
+    public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_image', 'product_id', 'image_id');
+        return $this->belongsToMany(Product::class, 'product_image');
     }
 }
