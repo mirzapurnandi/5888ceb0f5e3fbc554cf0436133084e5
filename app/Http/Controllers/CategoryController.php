@@ -23,6 +23,11 @@ class CategoryController extends Controller
         return $this->categoryService->getData($datas);
     }
 
+    public function view(Request $request)
+    {
+        return $this->categoryService->getData([], $request->id);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [

@@ -17,6 +17,7 @@ Route::group([
     'middleware' => ['auth:api'], 'prefix' => 'v1'
 ], function ($router) {
     Route::get('category', [CategoryController::class, 'index']);
+    Route::get('category/{id}', [CategoryController::class, 'view']);
     Route::post('category', [CategoryController::class, 'store']);
     Route::put('category/{id}', [CategoryController::class, 'update']);
     Route::delete('category/{id}', [CategoryController::class, 'destroy']);

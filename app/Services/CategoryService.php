@@ -17,10 +17,14 @@ class CategoryService
         $this->name = 'Category';
     }
 
-    public function getData($datas)
+    public function getData($datas, $id = null)
     {
         try {
-            $result = Category::simplepaginate($datas['limit']);
+            if ($id != "") {
+                $result = Category::with('products:id,name')->where('id', $id)->first();
+            } else {
+                $result = Category::simplepaginate($datas['limit']);
+            }
             return $this->successResponse($result, 'Success');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage(), $th->getCode());
