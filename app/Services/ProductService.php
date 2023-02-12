@@ -17,10 +17,14 @@ class ProductService
         $this->name = 'Product';
     }
 
-    public function getData($datas)
+    public function getData($datas, $id = null)
     {
         try {
-            $result = Product::with('categories:id,name,enable')->simplepaginate($datas['limit']);
+            if ($id != "") {
+                $result = Product::with('categories:id,name,enable')->where('id', $id)->first();
+            } else {
+                $result = Product::with('categories:id,name,enable')->simplepaginate($datas['limit']);
+            }
             return $this->successResponse($result, 'Success');
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage(), $th->getCode());

@@ -23,6 +23,11 @@ class ProductController extends Controller
         return $this->productService->getData($datas);
     }
 
+    public function view(Request $request)
+    {
+        return $this->productService->getData([], $request->id);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
