@@ -66,4 +66,19 @@ class ProductController extends Controller
     {
         return $this->productService->deleteData($request->id);
     }
+
+    public function store_image(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required|exists:products,id',
+            'image_id' => 'required|array',
+            'image_id.*' => 'exists:images,id'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->errorResponse($validator->errors(), 422);
+        }
+
+        return $this->productService->insertImage($request);
+    }
 }

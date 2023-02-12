@@ -76,4 +76,16 @@ class ProductService
             throw new SurplusException('Maaf, gagal menghapus ' . $this->name);
         }
     }
+
+    public function insertImage($request)
+    {
+        try {
+            $data = Product::findOrFail($request->product_id);
+            $data->images()->attach($request->image_id);
+
+            return $this->successResponse($data, 'Image berhasil ditambahkan.');
+        } catch (\Throwable $th) {
+            throw new SurplusException('Maaf, terjadi kesalahan saat insert Image');
+        }
+    }
 }
