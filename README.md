@@ -83,11 +83,13 @@ Gunakan Selalu header Accept untuk mendapatkan response berupa Json, lalu gunaka
 #### Category Index
 | GET | Category Index | http://localhost:8000/api/v1/category |
 | ------ | ------ | ------ | 
+
 Point ini akan menampilkan semua category yang telah di input.
 
 #### Category View
 | GET | Category View | http://localhost:8000/api/v1/category/1 |
 | ------ | ------ | ------ | 
+
 Point ini akan menampilkan satu data category yang telah di input.
 
 #### Category Insert
@@ -115,4 +117,5 @@ Point ini memperbaharui data category id = 1.
 #### Category Delete
 | DELETE | Category Delete | http://localhost:8000/api/v1/category/1 |
 | ------ | ------ | ------ | 
+
 Point ini akan menghapus satu data category yang telah di input.
