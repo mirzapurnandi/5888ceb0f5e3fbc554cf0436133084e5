@@ -16,7 +16,7 @@ class Controller extends BaseController
 
     protected function guard()
     {
-        return Auth::guard();
+        return Auth::guard('api');
     }
 
     public function respondWithToken($token)
