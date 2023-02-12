@@ -70,6 +70,7 @@ class ProductController extends Controller
     public function store_image(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'function' => 'required',
             'product_id' => 'required|exists:products,id',
             'image_id' => 'required|array',
             'image_id.*' => 'exists:images,id'

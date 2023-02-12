@@ -23,7 +23,7 @@ class ImageService
             if ($id != "") {
                 $result = Image::with('products:id,name')->where('id', $id)->first();
             } else {
-                $result = Image::simplepaginate($datas['limit']);
+                $result = Image::with('products:id,name')->simplepaginate($datas['limit']);
             }
             return $this->successResponse($result, 'Success');
         } catch (\Throwable $th) {

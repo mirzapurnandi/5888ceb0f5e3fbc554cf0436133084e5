@@ -21,9 +21,9 @@ class ProductService
     {
         try {
             if ($id != "") {
-                $result = Product::with('categories:id,name,enable')->where('id', $id)->first();
+                $result = Product::with('categories:id,name,enable', 'images:id,name,file')->where('id', $id)->first();
             } else {
-                $result = Product::with('categories:id,name,enable')->simplepaginate($datas['limit']);
+                $result = Product::with('categories:id,name,enable', 'images:id,name,file')->simplepaginate($datas['limit']);
             }
             return $this->successResponse($result, 'Success');
         } catch (\Throwable $th) {
@@ -81,9 +81,14 @@ class ProductService
     {
         try {
             $data = Product::findOrFail($request->product_id);
-            $data->images()->attach($request->image_id);
 
-            return $this->successResponse($data, 'Image berhasil ditambahkan.');
+            if ($request->function == 'insert') {
+                $data->images()->attach($request->image_id);
+                return $this->successResponse($data, 'Image berhasil ditambahkan.');
+            } else {
+                $data->images()->sync($request->image_id);
+                return $this->successResponse($data, 'Image berhasil diperbaharui.');
+            }
         } catch (\Throwable $th) {
             throw new SurplusException('Maaf, terjadi kesalahan saat insert Image');
         }
